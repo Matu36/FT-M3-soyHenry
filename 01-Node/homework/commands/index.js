@@ -1,67 +1,51 @@
-var fs = require("fs");
-var request = require("request");
+let fs = require("fs");
+let request = require ("request");
 
-const pwd = (args, done) => {
-  done(process.cwd());
-};
-const date = (args, done) => {
-  done(Date());
-};
-const ls = (args, done) => {
-  fs.readdir(".", function (err, files) {
-    if (err) throw err;
-    var out = "";
-    files.forEach(function (file) {
-      out = out + file + "\n";
-      //   process.stdout.write(file.toString() + "\n");
-    });
-    done(out);
-    // process.stdout.write("\nprompt > ");
-  });
-};
-const echo = (args, done) => {
-  var out = args.join(" ");
-  done(out);
-};
-const cat = (file, done) => {
-  fs.readFile(file[0], "utf8", function (err, data) {
-    if (err) throw err;
-    done(data);
-  });
-};
-const head = (file, done) => {
-  fs.readFile(file[0], "utf8", function (err, data) {
-    if (err) throw err;
-    const lines = data.split("\n").slice(0, 10).join("\n");
-    done(lines);
-    // process.stdout.write(lines);
-    // process.stdout.write("\nprompt > ");
-  });
-};
-const tail = (file, done) => {
-  fs.readFile(file[0], "utf8", function (err, data) {
-    if (err) throw err;
-    const lines = data.split("\n").slice(-10).join("\n");
-    done(lines);
-    // process.stdout.write(lines);
-    // process.stdout.write("\nprompt > ");
-  });
-};
-const curl = (url, done) => {
-  request(url[0], function (err, response, body) {
-    if (err) throw err;
-    done(body);
-    // process.stdout.write(body);
-    // process.stdout.write("\nprompt > ");
-  });
-};
 module.exports = {
-  pwd,
-  date,
-  ls,
-  echo,
-  cat,
-  head,
-  tail,
-  curl,
-};
+  echo: function (args, print) {
+    print (args.join(" "));
+  },
+  date: function (Args, print) {
+  print (Date());
+},
+ls: function (args, print) {
+  fs.readdir (".", function (err, files) {
+    if (err) throw err;
+    print (files.join("\n"));
+  })
+},
+  pwd: function (args, print) {
+print (process.cwd())
+  },
+  cat: function (args, print) {
+    fs.readFile(args[0], "utf8", function (err, data) {
+      if (err) throw err;
+      print (data);
+    })
+  },
+  head: function (args, print) {
+    fs.readFile(args[0], "utf8", function (err, data) {
+      if(err) throw err;
+      print (data.split("\n").splice (0,10).join("\n"));
+    })
+  },
+  tail: function (args, print) {
+    fs.readFile(args[0], "utf8", function (err, data) {
+    if(err) throw err;
+    print (data.split("\n").splice (-10).join("\n"));
+})
+},
+ 
+   curl: function (args, print)  {
+  request(args[0], function (err, data) {
+    if (err) throw err;
+    print (data.body);
+    
+  });
+}
+}
+
+
+
+
+
