@@ -44,7 +44,7 @@ function problemA() {
    * A. loguea el poema uno stanza uno (ignorá errores)
    *
    */
-
+  
   // callback version
   // readFile("poem-one/stanza-01.txt", function (err, stanza) {
   //   console.log("-- A. callback version --");
@@ -53,6 +53,9 @@ function problemA() {
 
   // promise version
   // ???
+  
+  
+  
   promisifiedReadFile("poem-one/stanza-01.txt").then((stanza) => blue(stanza));
 }
 
@@ -154,6 +157,8 @@ function problemD() {
   promisifiedReadFile("poem-one/wrong-file-name.txt").then(
     (stanza4) => blue(stanza4),
     (err) => magenta(new Error(err))
+    //aca puede ser tambien
+    //.catch((err) => magenta (new Error(err)))
   );
 }
 
