@@ -91,3 +91,4 @@ $Promise.prototype.catch = function (errorCb)  {
 
 
 
+module.exports = $Promise
