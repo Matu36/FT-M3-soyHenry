@@ -6,7 +6,7 @@ const STATUS_USER_ERROR = 422;
 // This array of posts persists in memory across requests. Feel free
 // to change this to a let binding if you need to reassign it.
 let posts = [];
-let id = 1;
+let id = 1
 
 const server = express();
 // to enable parsing of json bodies for post requests
